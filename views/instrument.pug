@@ -1,4 +1,13 @@
 extends layout
 
 block content
-  h1= title
+  h1= "Search Results - Instruments"
+    - let results = [{ instrument_name: 'Guitar', manufacturer: 'Fender', price: 500 },{ instrument_name: 'Piano', manufacturer: 'Yamaha', price: 1500 },{ instrument_name: 'Drums', manufacturer: 'Pearl', price: 800 }]
+
+  .container-fluid
+    .row
+       each instrument in results
+        .col-sm-4
+          h3 #{instrument.instrument_name}
+          p Manufacturer: #{instrument.manufacturer}
+          p Price: $#{instrument.price}
