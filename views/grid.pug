@@ -2,4 +2,32 @@ extends layout
 
 block content
   h1= title
-  
+
+  - let rowsStr = query.rows;
+  - let colsStr = query.cols;
+
+  // Check if both rows and cols are provided
+  if (!rowsStr || !colsStr)
+    p Please provide both rows and cols query parameters.
+  else
+    - let rows = parseInt(rowsStr);
+    - let cols = parseInt(colsStr);
+
+    // Check if rows and cols are integers
+    if (isNaN(rows) || isNaN(cols) || rows % 1 !== 0 || cols % 1 !== 0)
+      p The number of rows and columns must be integers.
+    else if (rows < 1 || cols < 1)
+      p The number of rows and columns must be positive.
+    else
+      // Debugging: Display original query parameters
+      p Query Parameters:
+        | Rows: #{rows}, Cols: #{cols}
+
+      // Generate the grid table
+      table
+        // Loop for rows
+        - for (let i = 0; i < rows; i++)
+          tr
+            // Loop for columns
+            - for (let j = 0; j < cols; j++)
+              td= Math.min(i + 1, j + 1)
